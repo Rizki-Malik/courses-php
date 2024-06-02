@@ -41,15 +41,13 @@
         </div>
     </header>
     <main>
-        <section class="hero">
-            <?php
-                $page = 'pages/home.php';
-                if(isset($_GET['q'])){
-                    $page = 'pages/'.$_GET['q'].'.php';
-                }
-                require($page);
-            ?>
-        </section>
+        <?php
+            $page = 'pages/home.php';
+            if(isset($_GET['q'])){
+                $page = 'pages/'.$_GET['q'].'.php';
+            }
+            require($page);
+        ?>
     </main>
     <footer class="footer">
         <div class="footer-nav">

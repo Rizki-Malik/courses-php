@@ -4,7 +4,7 @@
   
     //redirect if logged in
     if(isset($_SESSION['user'])){
-        header("location:dashboard.php");
+        header("location:index.php");
     }
     require_once('../../pustaka/Koneksi.php');
     //$koneksi = new Koneksi();

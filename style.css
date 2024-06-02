@@ -160,15 +160,18 @@ nav{
 /* End Header */
 
 /* Start Main */
+main{
+  min-height: 1000px;
+  background: #aedee0;
+}
+
 .hero {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    text-align: left;
-    padding: 50px;
-    background: #aedee0;
-    color: black;
-    height: 1000px;
-  }
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  text-align: left;
+  padding: 50px;
+  color: black;
+}
 
   .jumbotron{
     margin-top: 350px;
@@ -284,3 +287,31 @@ nav{
     background-color: white;
   }
 /* End Footer */
+
+/* Start Articles */
+.articles{
+  display: grid;
+  grid-template-columns: repeat(3, 6fr);
+  text-align: left;
+  padding: 10px;
+  padding-bottom: 50px;
+  color: black;
+}
+
+.article {
+  background-color: #000;
+  color: #fff;
+  margin-top: 50px;
+  margin-right: 50px;
+  margin-left: 50px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.thumbnail{
+  width: 485px;
+  height: 300px;
+  object-fit: contain;
+  margin-bottom: 25px;
+}
+/* End Articles */

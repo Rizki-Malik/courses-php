@@ -12,7 +12,6 @@ $user = new User();
 //fetch user data
 $sql = "SELECT * FROM login WHERE id = '".$_SESSION['user']."'";
 $row = $user->details($sql);
-//echo $row['username'];  
 
 require_once('../components/header.php');
 
