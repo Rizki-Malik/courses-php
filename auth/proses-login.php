@@ -2,7 +2,7 @@
     //start session
     session_start();
     
-    require_once('../../pustaka/User.php');
+    require_once('../pustaka/User.php');
     
     $user = new User();
     
@@ -19,12 +19,12 @@
         }
         else{
             $_SESSION['user'] = $auth;
-            header("location:dashboard.php");
+            header("location:../admin/dashboard/index.php");
         }
     }
     else{
         $_SESSION['message'] = 'Silahkan Login Terlebih Dahulu';
-        header('location:index.php');
+        header('location:login.php');
     }
 
     //header("location:dashboard.php");

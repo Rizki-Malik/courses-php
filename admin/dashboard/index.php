@@ -2,7 +2,7 @@
 session_start();
 //kembalikan ke halaman login jika belum login
 if (!isset($_SESSION['user']) ||(trim ($_SESSION['user']) == '')){
-    header('location:login.php');
+    header('location:../../auth/login.php');
 }
 
 require_once('../../pustaka/User.php');

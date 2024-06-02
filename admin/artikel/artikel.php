@@ -23,6 +23,7 @@
                 <tbody>
                     <?php
                     require_once '../../pustaka/Crud.php';
+                    require_once '../../pustaka/Thumbnail.php';
                     $crud = new Crud();
                     $artikel = $crud->read('artikel');
                     $no = 1;
@@ -54,13 +55,27 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     $table = 'artikel';
     $id_artikel = $_GET['id'];
     $where = ['id' => $id_artikel];
-    $hasil = $crud->delete($table, $where);
+    
+    $artikel = $crud->read($table, $where);
+    if ($artikel) {
+        $thumbnail = $artikel[0]['thumbnail'];
+        
+        $thumbnailPath = $thumbnail;
+        if (file_exists($thumbnailPath)) {
+            unlink($thumbnailPath);
+        }
 
-    if ($hasil == true) {
-        echo "<script>alert('Data berhasil dihapus');</script>";
+        $hasil = $crud->delete($table, $where);
+
+        if ($hasil) {
+            echo "<script>alert('Data berhasil dihapus');</script>";
+        } else {
+            echo "<script>alert('Data tidak berhasil dihapus');</script>";
+        }
     } else {
-        echo "<script>alert('Data Tidak berhasil dihapus');</script>";
+        echo "<script>alert('Artikel tidak ditemukan');</script>";
     }
+    
     echo '<meta http-equiv="refresh" content="0; url=artikel.php">';
 }
 ?>
