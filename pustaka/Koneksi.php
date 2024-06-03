@@ -1,16 +1,10 @@
 <?php
-// define('DB_HOST', 'localhost');
-// define('DB_USER', 'root');
-// define('DB_PASS', '');
-// define('DB_NAME', 'my_web');
-
-
 class Koneksi
 {
     const HOST = 'localhost';
     const USER = 'root';
     const PASS = '';
-    const DB = 'my_web';
+    const DB = 'courses';
 
     protected $conn;
 
@@ -27,7 +21,11 @@ class Koneksi
         //else{
         //     echo 'Koneksi Berhasil';
         // }
+        // return $this->conn; // Remove this line
+    }
+
+    // Getter method to access the connection object
+    public function getConnection() {
         return $this->conn;
     }
 }
-//$koneksi = new Koneksi();

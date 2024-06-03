@@ -1,19 +1,28 @@
 <?php
-require_once '../../pustaka/Crud.php';
+require_once('../../pustaka/Crud.php');
 
-if(isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $crud = new Crud();
-    $article = $crud->read('artikel', ['id' => $id]);
+$crud = new Crud();
 
-    if($article) {
-        $article = $article[0];
+$table = 'articles';
+$id_artikel = isset($_GET['id']) ? $_GET['id'] : null;
+$where = [];
+if ($id_artikel) {
+    $where = ['id' => $id_artikel];
+    $row = $crud->read($table, $where);
+    if ($row) {
+        $artikel = $row[0];
+        // Fetch the username associated with user_id
+        $user_id = $artikel['user_id'];
+        $user = $crud->read('users', ['id' => $user_id]);
+        $username = $user ? $user[0]['username'] : 'Unknown';
     } else {
-        echo "Article not found.";
+        echo "<script>alert('Artikel tidak ditemukan');</script>";
+        echo '<meta http-equiv="refresh" content="0; url=artikel.php">';
         exit;
     }
 } else {
-    echo "Article ID not provided.";
+    echo "<script>alert('ID artikel tidak diberikan');</script>";
+    echo '<meta http-equiv="refresh" content="0; url=artikel.php">';
     exit;
 }
 ?>
@@ -61,13 +70,13 @@ if(isset($_GET['id'])) {
     </header>
     <div class="article-detail">
         <div class="article-head">
-            <h2><?= ucwords($article['judul']); ?></h2>
-            <p class="date-author"><?= $article['tanggal'] ?> | <?= $article['penulis']; ?></p>
+            <h2><?= ucwords($artikel['title']); ?></h2>
+            <p class="date-author"><?= $artikel['published_date'] ?> | <?= $username; ?></p>
         </div>
         <div class="jumbo-tb">
-            <img src="../../admin/artikel/<?= $article['thumbnail'] ?>" alt="thumbnail">
+            <img src="../../admin/artikel/<?= $artikel['thumbnail'] ?>" alt="thumbnail">
         </div>
-        <p><?= $article['deskripsi']; ?></p>
+        <p><?= $artikel['content']; ?></p>
     </div>
     <footer class="footer">
         <div class="footer-nav">

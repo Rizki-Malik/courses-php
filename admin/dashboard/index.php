@@ -10,7 +10,7 @@ require_once('../../pustaka/User.php');
 $user = new User();
 
 //fetch user data
-$sql = "SELECT * FROM login WHERE id = '".$_SESSION['user']."'";
+$sql = "SELECT * FROM users WHERE id = '".$_SESSION['user']."'";
 $row = $user->details($sql);
 
 require_once('../components/header.php');

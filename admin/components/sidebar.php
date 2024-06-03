@@ -18,95 +18,32 @@
           </a>
         </div>
         <div class="mdc-list-item mdc-drawer-item">
-          <a class="mdc-drawer-link" href="../artikel/artikel.php">
-            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">library_books</i>
-            Article
-          </a>
-        </div>
-        <div class="mdc-list-item mdc-drawer-item">
           <a class="mdc-expansion-panel-link" href="#" data-toggle="expansionPanel" data-target="ui-sub-menu">
             <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">dashboard</i>
-            UI Features
+            Layout
             <i class="mdc-drawer-arrow material-icons">chevron_right</i>
           </a>
           <div class="mdc-expansion-panel" id="ui-sub-menu">
             <nav class="mdc-list mdc-drawer-submenu">
               <div class="mdc-list-item mdc-drawer-item">
-                <a class="mdc-drawer-link" href="pages/ui-features/buttons.html">
-                  Buttons
+                <a class="mdc-drawer-link" href="../artikel/artikel.php">
+                  <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">library_books</i>
+                  Articles
+                </a>
+              </div>
+              <div class="mdc-list-item mdc-drawer-item">
+                <a class="mdc-drawer-link" href="../kategori/kategori.php">
+                  <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">library_add</i>
+                  Categories
                 </a>
               </div>
               <div class="mdc-list-item mdc-drawer-item">
                 <a class="mdc-drawer-link" href="pages/ui-features/typography.html">
-                  Typography
+                  Example
                 </a>
               </div>
             </nav>
           </div>
-        </div>
-        <div class="mdc-list-item mdc-drawer-item">
-          <a class="mdc-drawer-link" href="pages/tables/basic-tables.html">
-            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">grid_on</i>
-            Tables
-          </a>
-        </div>
-        <div class="mdc-list-item mdc-drawer-item">
-          <a class="mdc-drawer-link" href="pages/charts/chartjs.html">
-            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pie_chart_outlined</i>
-            Charts
-          </a>
-        </div>
-        <div class="mdc-list-item mdc-drawer-item">
-          <a class="mdc-expansion-panel-link" href="#" data-toggle="expansionPanel" data-target="sample-page-submenu">
-            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pages</i>
-            Sample Pages
-            <i class="mdc-drawer-arrow material-icons">chevron_right</i>
-          </a>
-          <div class="mdc-expansion-panel" id="sample-page-submenu">
-            <nav class="mdc-list mdc-drawer-submenu">
-              <div class="mdc-list-item mdc-drawer-item">
-                <a class="mdc-drawer-link" href="pages/samples/blank-page.html">
-                  Blank Page
-                </a>
-              </div>
-              <div class="mdc-list-item mdc-drawer-item">
-                <a class="mdc-drawer-link" href="pages/samples/403.html">
-                  403
-                </a>
-              </div>
-              <div class="mdc-list-item mdc-drawer-item">
-                <a class="mdc-drawer-link" href="pages/samples/404.html">
-                  404
-                </a>
-              </div>
-              <div class="mdc-list-item mdc-drawer-item">
-                <a class="mdc-drawer-link" href="pages/samples/500.html">
-                  500
-                </a>
-              </div>
-              <div class="mdc-list-item mdc-drawer-item">
-                <a class="mdc-drawer-link" href="pages/samples/505.html">
-                  505
-                </a>
-              </div>
-              <div class="mdc-list-item mdc-drawer-item">
-                <a class="mdc-drawer-link" href="pages/samples/login.html">
-                  Login
-                </a>
-              </div>
-              <div class="mdc-list-item mdc-drawer-item">
-                <a class="mdc-drawer-link" href="pages/samples/register.html">
-                  Register
-                </a>
-              </div>
-            </nav>
-          </div>
-        </div>
-        <div class="mdc-list-item mdc-drawer-item">
-          <a class="mdc-drawer-link" href="https://www.bootstrapdash.com/demo/material-admin-free/jquery/documentation/documentation.html" target="_blank">
-            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">description</i>
-            Documentation
-          </a>
         </div>
       </nav>
     </div>

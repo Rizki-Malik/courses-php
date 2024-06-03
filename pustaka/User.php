@@ -10,7 +10,7 @@ class User extends Koneksi{
   
     public function check_login($username, $password){
   
-        $sql = "SELECT * FROM login WHERE username = '$username'";
+        $sql = "SELECT * FROM users WHERE username = '$username'";
         $query = $this->conn->query($sql);
   
         if($query->num_rows > 0){

@@ -14,10 +14,12 @@
                 <thead>
                     <tr class="text-center">
                         <th class="text-left">#</th>
-                        <th>Tanggal</th>
-                        <th>Judul Artikel</th>
-                        <th>Penulis</th>
-                        <th>Aksi</th>
+                        <th class="text-left">Thumbnail</th>
+                        <th class="text-left">Penulis</th>
+                        <th class="text-center">Judul Artikel</th>
+                        <th class="text-center">Kategori Artikel</th>
+                        <th class="text-center">Tanggal</th>
+                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,23 +27,36 @@
                     require_once '../../pustaka/Crud.php';
                     require_once '../../pustaka/Thumbnail.php';
                     $crud = new Crud();
-                    $artikel = $crud->read('artikel');
-                    $no = 1;
-                    foreach ($artikel as $row) :
+                    $conn = $crud->getConnection();
+                    
+                    $sql = "CALL GetArticles()";
+                    $result = $conn->query($sql);
+                    if ($result) {
+                        $artikel = [];
+                        while ($row = $result->fetch_assoc()) {
+                            $artikel[] = $row;
+                        }
+                        $no = 1;
+                        foreach ($artikel as $row) :
                     ?>
                         <tr>
                             <th scope="row"><?= $no++; ?></th>
-                            <td><?= $row['tanggal'] ?></td>
-                            <td><?= ucwords($row['judul']); ?></td>
-                            <td><?= $row['penulis']; ?></td>
-                            <td>
+                            <td class="text-left"><img src="<?= $row['thumbnail'] ?>" alt="thumbnail" width="300px" height="300px" style="object-fit: contain;"></td>
+                            <td class="text-center"><?= $row['username'] ?></td>
+                            <td class="text-center"><?= ucwords($row['title']); ?></td>
+                            <td class="text-center"><?= $row['category_name'] ?></td>
+                            <td class="text-center"><?= $row['published_date'] ?></td>
+                            <td class="text-center">
                                 <a href="#" data-toggle="tooltip" data-placement="top" title="Detail"><i class="material-icons">remove_red_eye</i></a>
                                 <a href="artikel-edit.php?id=<?= $row['id']; ?>" data-toggle="tooltip" data-placement="top" title="Edit"><i class="material-icons" aria-hidden="true">edit</i></a>
-                                <a href="artikel.php?action=delete&id=<?= $row['id']; ?>" onclick="return confirm('Apakah anda yakin ?');" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="material-icons" aria-hidden="true">delete</i></a>
+                                <a href="delete-artikel.php?id=<?= $row['id']; ?>" onclick="return confirm('Apakah anda yakin ?');" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="material-icons" aria-hidden="true">delete</i></a>
                             </td>
                         </tr>
                     <?php
-                    endforeach;
+                        endforeach;
+                    } else {
+                        echo "<tr><td colspan='6'>Terjadi kesalahan pada query!</td></tr>";
+                    }
                     ?>
                 </tbody>
             </table>
@@ -49,33 +64,3 @@
     </div>
 </div>
 <?php require_once '../components/footer.php'; ?>
-
-<?php
-if (isset($_GET['action']) && $_GET['action'] == 'delete') {
-    $table = 'artikel';
-    $id_artikel = $_GET['id'];
-    $where = ['id' => $id_artikel];
-    
-    $artikel = $crud->read($table, $where);
-    if ($artikel) {
-        $thumbnail = $artikel[0]['thumbnail'];
-        
-        $thumbnailPath = $thumbnail;
-        if (file_exists($thumbnailPath)) {
-            unlink($thumbnailPath);
-        }
-
-        $hasil = $crud->delete($table, $where);
-
-        if ($hasil) {
-            echo "<script>alert('Data berhasil dihapus');</script>";
-        } else {
-            echo "<script>alert('Data tidak berhasil dihapus');</script>";
-        }
-    } else {
-        echo "<script>alert('Artikel tidak ditemukan');</script>";
-    }
-    
-    echo '<meta http-equiv="refresh" content="0; url=artikel.php">';
-}
-?>

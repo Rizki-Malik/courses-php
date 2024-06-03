@@ -1,45 +1,69 @@
-<?php require_once('../components/header.php'); ?>
+<?php
+ob_start(); // Start output buffering
+session_start();
+
+// Ensure user is logged in
+if (!isset($_SESSION['user']) || trim($_SESSION['user']) == '') {
+    header('Location: ../../auth/login.php');
+    exit();
+}
+
+require_once('../components/header.php');
+require_once('../../pustaka/Crud.php');
+require_once('../../pustaka/User.php');
+
+// Initialize the User and Crud classes
+$user = new User();
+$crud = new Crud();
+
+// Fetch user data using session user ID
+$sql = "SELECT * FROM users WHERE id = '".$_SESSION['user']."'";
+$user_details = $user->details($sql);
+$user_id = $_SESSION['user'];
+
+// Fetch categories
+$categories = $crud->read('categories');
+?>
 <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
     <div class="mdc-card">
         <h6 class="card-title">Artikel Baru</h6>
         <div class="template-demo">
             <form action="" method="post" enctype="multipart/form-data">
-                <!-- Penulis input -->
-                <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
-                    <div class="mdc-text-field mdc-text-field--outlined">
-                        <input class="mdc-text-field__input" name="penulis" id="penulis" required>
-                        <div class="mdc-notched-outline">
-                            <div class="mdc-notched-outline__leading"></div>
-                            <div class="mdc-notched-outline__notch">
-                                <label for="penulis" class="mdc-floating-label">Penulis</label>
-                            </div>
-                            <div class="mdc-notched-outline__trailing"></div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Tanggal input -->
-                <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
-                    <div class="mdc-text-field mdc-text-field--outlined">
-                        <input class="mdc-text-field__input" type="date" name="tanggal" id="tanggal" required>
-                        <div class="mdc-notched-outline">
-                            <div class="mdc-notched-outline__leading"></div>
-                            <div class="mdc-notched-outline__notch">
-                                <label for="tanggal" class="mdc-floating-label">Tanggal Artikel</label>
-                            </div>
-                            <div class="mdc-notched-outline__trailing"></div>
-                        </div>
-                    </div>
-                </div>
                 <!-- Judul input -->
                 <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
                     <div class="mdc-text-field mdc-text-field--outlined">
-                        <input class="mdc-text-field__input" name="judul" id="judul" required>
+                        <input class="mdc-text-field__input" name="title" id="title" required>
                         <div class="mdc-notched-outline">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch">
-                                <label for="judul" class="mdc-floating-label">Judul Artikel</label>
+                                <label for="title" class="mdc-floating-label">Judul Artikel</label>
                             </div>
                             <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Kategori Input -->
+                <div class="mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-6-desktop stretch-card">
+                    <div class="mdc-card">
+                        <h6 class="card-title">Pilih Kategori</h6>
+                        <div class="template-demo">
+                            <div class="mdc-select demo-width-class" data-mdc-auto-init="MDCSelect">
+                                <input type="hidden" name="category_id">
+                                <i class="mdc-select__dropdown-icon"></i>
+                                <div class="mdc-select__selected-text"></div>
+                                <div class="mdc-select__menu mdc-menu-surface demo-width-class">
+                                    <ul class="mdc-list">
+                                        <li class="mdc-list-item mdc-list-item--selected" data-value="" aria-selected="true"></li>
+                                        <?php foreach ($categories as $category): ?>
+                                            <li class="mdc-list-item" data-value="<?= $category['id']; ?>">
+                                                <?= htmlspecialchars($category['category_name']); ?>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                                <span class="mdc-floating-label">Pilih Kategori</span>
+                                <div class="mdc-line-ripple"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -59,11 +83,11 @@
                 <!-- Deskripsi input -->
                 <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
                     <div class="mdc-text-field mdc-text-field--outlined">
-                        <input class="mdc-text-field__input" name="deskripsi" id="deskripsi" required>
+                        <input class="mdc-text-field__input" name="content" id="content" required>
                         <div class="mdc-notched-outline">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch">
-                                <label for="deskripsi" class="mdc-floating-label">Deskripsi Artikel</label>
+                                <label for="content" class="mdc-floating-label">Deskripsi Artikel</label>
                             </div>
                             <div class="mdc-notched-outline__trailing"></div>
                         </div>
@@ -77,31 +101,29 @@
         </div>
     </div>
 </div>
-<?php require_once('../components/footer.php'); ?>
 
-<?php
-require_once('../../pustaka/Crud.php');
+<?php 
+require_once('../components/footer.php');
 require_once('../../pustaka/Thumbnail.php');
 
-$crud = new Crud();
-
 if (isset($_POST['submit'])) {
-    $tanggal = $_POST['tanggal'];
-    $penulis = $_POST['penulis'];
-    $judul = $_POST['judul'];
-    $deskripsi = $_POST['deskripsi'];
+    $published_date = date("Y-m-d"); 
+    $title = $_POST['title'];
+    $category_id = $_POST['category_id'];
+    $content = $_POST['content'];
     $thumbnailResult = Thumbnail::upload($_FILES["thumbnail"]);
 
     if (strpos($thumbnailResult, 'The file') !== false) {
         $data = [
-            'tanggal' => $tanggal,
-            'penulis' => $penulis,
-            'judul' => $judul,
-            'deskripsi' => $deskripsi,
+            'published_date' => $published_date,
+            'user_id' => $user_id,
+            'category_id' => $category_id,
+            'title' => $title,
+            'content' => $content,
             'thumbnail' => basename($_FILES["thumbnail"]["name"])
         ];
 
-        $hasil = $crud->create('artikel', $data);
+        $hasil = $crud->create('articles', $data);
 
         if ($hasil) {
             echo "<script>alert('Data berhasil disimpan');</script>";
@@ -113,4 +135,6 @@ if (isset($_POST['submit'])) {
         echo "<script>alert('$thumbnailResult');</script>";
     }
 }
+
+ob_end_flush(); // End output buffering and flush output
 ?>

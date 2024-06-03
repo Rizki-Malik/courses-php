@@ -51,8 +51,8 @@
 
                 <form action="proses-login.php" method="post">
                     <div class="form-group">
-                        <label for="email">Username</label>
-                        <input type="text" name="username" class="form-control" placeholder="Masukan Username">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" class="form-control" id="username" placeholder="Masukan Username">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>

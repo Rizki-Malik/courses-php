@@ -174,7 +174,7 @@ main{
 }
 
   .jumbotron{
-    margin-top: 350px;
+    margin-top: 250px;
   }
   .hero .greeting {
     font-family: 'Poppins';
@@ -330,6 +330,12 @@ main{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.date-author {
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
 .thumbnail{
   width: 485px;
   height: 300px;
@@ -339,7 +345,7 @@ main{
 
 .article-detail {
   background-color: #aedee0;
-  padding: 20px;
+  padding: 50px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   min-height: 1000px;
 }
@@ -350,6 +356,7 @@ main{
 
 .article-detail h2 {
   font-size: 50px;
+  margin-left: 50px;
   margin-bottom: 10px;
   color: #333;
 }
@@ -361,22 +368,21 @@ main{
 }
 
 .jumbo-tb{
-  margin: 20px 500px;
+  margin: 20px 600px;
 }
 
 .article-detail img {
   max-width: 1000px;
-  min-width: 500px;
+  max-height: 500px;
   object-fit: contain;
-  height: auto;
   border-radius: 5px;
   margin-bottom: 15px;
 }
 
 .article-detail p {
   margin-top: 10px;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
   margin-bottom: 50px;
   font-size: 20px;
   line-height: 1.6;
