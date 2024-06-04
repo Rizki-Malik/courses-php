@@ -1,48 +1,27 @@
-<?php
-ob_start(); // Start output buffering
-session_start();
-
-// Ensure user is logged in
-if (!isset($_SESSION['user']) || trim($_SESSION['user']) == '') {
-    header('Location: ../../auth/login.php');
-    exit();
-}
-
-require_once('../components/header.php');
+<?php require_once('../components/header.php'); 
 require_once('../../pustaka/Crud.php');
-require_once('../../pustaka/User.php');
-
-// Initialize the User and Crud classes
-$user = new User();
 $crud = new Crud();
-
-// Fetch user data using session user ID
-$sql = "SELECT * FROM users WHERE id = '".$_SESSION['user']."'";
-$user_details = $user->details($sql);
-$user_id = $_SESSION['user'];
-
-// Fetch categories
 $categories = $crud->read('categories');
 ?>
 <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
     <div class="mdc-card">
-        <h6 class="card-title">Artikel Baru</h6>
+        <h6 class="card-title">Kelas Baru</h6>
         <div class="template-demo">
             <form action="" method="post" enctype="multipart/form-data">
-                <!-- Judul input -->
+                <!-- Nama Kategori input -->
                 <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
                     <div class="mdc-text-field mdc-text-field--outlined">
-                        <input class="mdc-text-field__input" name="title" id="title" required>
+                        <input class="mdc-text-field__input" name="course_name" id="course_name" required>
                         <div class="mdc-notched-outline">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch">
-                                <label for="title" class="mdc-floating-label">Judul Artikel</label>
+                                <label for="course_name" class="mdc-floating-label">Nama Kelas</label>
                             </div>
                             <div class="mdc-notched-outline__trailing"></div>
                         </div>
                     </div>
                 </div>
-                <!-- Kategori Input -->
+                <!-- Kategori Dropdown -->
                 <div class="mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-6-desktop stretch-card">
                     <div class="mdc-card">
                         <h6 class="card-title">Pilih Kategori</h6>
@@ -83,11 +62,24 @@ $categories = $crud->read('categories');
                 <!-- Deskripsi input -->
                 <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
                     <div class="mdc-text-field mdc-text-field--outlined">
-                        <input class="mdc-text-field__input" name="content" id="content" required>
+                        <textarea class="mdc-text-field__input" name="description" id="description" required></textarea>
                         <div class="mdc-notched-outline">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch">
-                                <label for="content" class="mdc-floating-label">Deskripsi Artikel</label>
+                                <label for="description" class="mdc-floating-label">Deskripsi Kelas</label>
+                            </div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Harga Kelas input -->
+                <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                    <div class="mdc-text-field mdc-text-field--outlined">
+                        <input class="mdc-text-field__input" name="price" id="price" required>
+                        <div class="mdc-notched-outline">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch">
+                                <label for="price" class="mdc-floating-label">Harga Kelas</label>
                             </div>
                             <div class="mdc-notched-outline__trailing"></div>
                         </div>
@@ -101,40 +93,33 @@ $categories = $crud->read('categories');
         </div>
     </div>
 </div>
-
 <?php 
 require_once('../components/footer.php');
 require_once('../../pustaka/Thumbnail.php');
 
+
 if (isset($_POST['submit'])) {
-    $published_date = date("Y-m-d"); 
-    $title = $_POST['title'];
+    $course_name = $_POST['course_name'];
     $category_id = $_POST['category_id'];
-    $content = $_POST['content'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
     $thumbnailResult = Thumbnail::upload($_FILES["thumbnail"]);
 
-    if (strpos($thumbnailResult, 'The file') !== false) {
-        $data = [
-            'published_date' => $published_date,
-            'user_id' => $user_id,
-            'category_id' => $category_id,
-            'title' => $title,
-            'content' => $content,
-            'thumbnail' => basename($_FILES["thumbnail"]["name"])
-        ];
+    $data = [
+        'course_name' => $course_name,
+        'category_id' => $category_id,
+        'description' => $description,
+        'price' => $price,
+        'thumbnail' => basename($_FILES["thumbnail"]["name"])
+    ];
 
-        $hasil = $crud->create('articles', $data);
+    $hasil = $crud->create('course', $data);
 
-        if ($hasil) {
-            echo "<script>alert('Data berhasil disimpan');</script>";
-        } else {
-            echo "<script>alert('Data tidak berhasil disimpan');</script>";
-        }
-        echo '<meta http-equiv="refresh" content="0; url=artikel.php">';
+    if ($hasil) {
+        echo "<script>alert('Data berhasil disimpan');</script>";
     } else {
-        echo "<script>alert('$thumbnailResult');</script>";
+        echo "<script>alert('Data tidak berhasil disimpan');</script>";
     }
+    echo '<meta http-equiv="refresh" content="0; url=course.php">';
 }
-
-ob_end_flush(); // End output buffering and flush output
 ?>

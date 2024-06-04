@@ -36,6 +36,18 @@ class Crud extends Koneksi {
         return $result ? true : false;
     }
 
+    function register($table, $data) {
+        $columns = implode(", ", array_keys($data));
+        $values = implode("', '", array_map([$this->conn, 'real_escape_string'], array_values($data)));
+        $sql = "INSERT INTO $table ($columns) VALUES ('$values')";
+        
+        if ($this->conn->query($sql) === TRUE) {
+            return $this->conn->insert_id;
+        } else {
+            throw new Exception("Error: " . $this->conn->error);
+        }
+    }
+
     function update($table, $data, $where) {
         $sets = [];
         foreach ($data as $key => $value) {

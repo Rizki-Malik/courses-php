@@ -35,3 +35,4 @@
   <!-- End custom js for this page-->
 </body>
 </html> 
+<?php ob_end_flush(); ?>

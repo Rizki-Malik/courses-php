@@ -22899,6 +22899,10 @@ address p {
 .mdc-drawer .mdc-drawer__header .brand-logo {
   display: block;
   padding: 28px 0;
+  color: #B51B75;
+  font-size: 25px;
+  font-family: "Shippori Antique B1", sans-serif;
+  font-weight: bolder;
 }
 
 .mdc-drawer .mdc-drawer__content .user-info {

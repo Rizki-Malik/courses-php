@@ -18,7 +18,7 @@
             <div class="card-content">
                 <p class="date-author"><?= $row['published_date'] ?> | <?= $row['username']; ?></p>
                 <a href="pages/detail/artikel-detail.php?id=<?= $row['id']; ?>">
-                    <img src="admin/artikel/<?= $row['thumbnail'] ?>" alt="thumbnail" class="thumbnail">
+                    <img src="master/artikel/<?= $row['thumbnail'] ?>" alt="thumbnail" class="thumbnail">
                     <h2 class="card-title"><?= ucwords($row['title']); ?></h2>
                     <p class="card-text"><?= strlen($row['content']) > 100 ? substr($row['content'], 0, 100) . '...' : $row['content']; ?></p>
                 </a>

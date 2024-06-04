@@ -19,7 +19,7 @@
         }
         else{
             $_SESSION['user'] = $auth;
-            header("location:../admin/dashboard/index.php");
+            header("location:../master/dashboard/index.php");
         }
     }
     else{

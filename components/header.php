@@ -31,12 +31,14 @@
             </ul>
         </nav>
         <div class="contact">
-            <a class="link-contact" href="#">
-                <div class="status">
-                    <img src="assets/img/mailbox.png" alt="icon" width="20px">
-                    Available for new projects.
-                </div>
-                <button class="contact-button">Contact me</button>
-            </a>
+            <div class="link-contact">
+                <a href="/courses/auth/register.php?type=student">
+                    <div class="status">
+                        <img src="assets/img/mailbox.png" alt="icon" width="20px">
+                        Sign Up as Student!
+                    </div>
+                </a>
+                <a href="/courses/auth/register.php?type=instructor"><button class="contact-button">Sign Up as Instructor!</button></a>
+            </div>
         </div>
     </header>

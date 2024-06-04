@@ -11,7 +11,6 @@ if ($id_artikel) {
     $row = $crud->read($table, $where);
     if ($row) {
         $artikel = $row[0];
-        // Fetch the username associated with user_id
         $user_id = $artikel['user_id'];
         $user = $crud->read('users', ['id' => $user_id]);
         $username = $user ? $user[0]['username'] : 'Unknown';
@@ -29,7 +28,7 @@ if ($id_artikel) {
 <!DOCTYPE html>
 <html>
     <head>
-        <title>::. Artikel .::</title>
+        <title>::. Home .::</title>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Shippori+Antique+B1&family=Taviraj:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
             @import url('https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap');
@@ -42,7 +41,7 @@ if ($id_artikel) {
         <div class="icon">
             <a href="#" class="full-name">
                 <div class="first-name">
-                    Course
+                    Course 
                 </div>
                 <div class="last-name">
                     Programming
@@ -59,13 +58,15 @@ if ($id_artikel) {
             </ul>
         </nav>
         <div class="contact">
-            <a class="link-contact" href="#">
-                <div class="status">
-                    <img src="../../assets/img/mailbox.png" alt="icon" width="20px">
-                    Available for new projects.
-                </div>
-                <button class="contact-button">Contact me</button>
-            </a>
+            <div class="link-contact">
+                <a href="/courses/auth/register.php?type=student">
+                    <div class="status">
+                        <img src="../../assets/img/mailbox.png" alt="icon" width="20px">
+                        Sign Up as student!
+                    </div>
+                </a>
+                <a href="/courses/auth/register.php?type=instructor"><button class="contact-button">Sign Up as Instructor!</button></a>
+            </div>
         </div>
     </header>
     <div class="article-detail">
@@ -74,7 +75,7 @@ if ($id_artikel) {
             <p class="date-author"><?= $artikel['published_date'] ?> | <?= $username; ?></p>
         </div>
         <div class="jumbo-tb">
-            <img src="../../admin/artikel/<?= $artikel['thumbnail'] ?>" alt="thumbnail">
+            <img src="../../master/artikel/<?= $artikel['thumbnail'] ?>" alt="thumbnail">
         </div>
         <p><?= $artikel['content']; ?></p>
     </div>

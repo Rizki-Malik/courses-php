@@ -31,7 +31,6 @@
                             <th scope="row"><?= $no++; ?></th>
                             <td><?= ucwords($row['category_name']); ?></td>
                             <td>
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Detail"><i class="material-icons">remove_red_eye</i></a>
                                 <a href="kategori-edit.php?id=<?= $row['id']; ?>" data-toggle="tooltip" data-placement="top" title="Edit"><i class="material-icons" aria-hidden="true">edit</i></a>
                                 <a href="kategori.php?action=delete&id=<?= $row['id']; ?>" onclick="return confirm('Apakah anda yakin ?');" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="material-icons" aria-hidden="true">delete</i></a>
                             </td>

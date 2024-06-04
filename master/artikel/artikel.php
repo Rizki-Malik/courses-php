@@ -15,7 +15,7 @@
                     <tr class="text-center">
                         <th class="text-left">#</th>
                         <th class="text-left">Thumbnail</th>
-                        <th class="text-left">Penulis</th>
+                        <th class="text-center">Penulis</th>
                         <th class="text-center">Judul Artikel</th>
                         <th class="text-center">Kategori Artikel</th>
                         <th class="text-center">Tanggal</th>
@@ -42,12 +42,12 @@
                         <tr>
                             <th scope="row"><?= $no++; ?></th>
                             <td class="text-left"><img src="<?= $row['thumbnail'] ?>" alt="thumbnail" width="300px" height="300px" style="object-fit: contain;"></td>
-                            <td class="text-center"><?= $row['username'] ?></td>
+                            <td class="text-center"><?= ucwords($row['username']) ?></td>
                             <td class="text-center"><?= ucwords($row['title']); ?></td>
                             <td class="text-center"><?= $row['category_name'] ?></td>
                             <td class="text-center"><?= $row['published_date'] ?></td>
                             <td class="text-center">
-                                <a href="#" data-toggle="tooltip" data-placement="top" title="Detail"><i class="material-icons">remove_red_eye</i></a>
+                                <a href="../../pages/detail/artikel-detail.php?id=<?= $row['id']; ?>" data-toggle="tooltip" data-placement="top" title="Detail"><i class="material-icons">remove_red_eye</i></a>
                                 <a href="artikel-edit.php?id=<?= $row['id']; ?>" data-toggle="tooltip" data-placement="top" title="Edit"><i class="material-icons" aria-hidden="true">edit</i></a>
                                 <a href="delete-artikel.php?id=<?= $row['id']; ?>" onclick="return confirm('Apakah anda yakin ?');" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="material-icons" aria-hidden="true">delete</i></a>
                             </td>

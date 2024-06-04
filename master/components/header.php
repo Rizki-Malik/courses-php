@@ -1,3 +1,42 @@
+<?php 
+session_start();
+require_once('../../pustaka/User.php');
+
+if (!isset($_SESSION['user']) || trim($_SESSION['user']) == '') {
+    header('Location:../../auth/login.php');
+    exit();
+}
+
+$user = new User();
+$userId = $_SESSION['user'];
+
+// Fetch user data
+$sql = "SELECT * FROM users WHERE id = '$userId'";
+$userDetails = $user->details($sql);
+
+if ($userDetails && isset($userDetails['permission'])) {
+    $userPermission = $userDetails['permission'];
+} else {
+    $userPermission = 1;
+}
+
+if ($userPermission == 3) {
+    $sql = "SELECT student_name AS name, email FROM students WHERE user_id = '$userId'";
+    $row = $user->details($sql);
+    $name = isset($row['name'])? htmlspecialchars($row['name']) : 'User';
+    $email = isset($row['email'])? htmlspecialchars($row['email']) : 'User';
+} elseif ($userPermission == 2) {
+    $sql = "SELECT instructor_name AS name, email FROM instructors WHERE user_id = '$userId'";
+    $row = $user->details($sql);
+    $name = isset($row['name'])? htmlspecialchars($row['name']) : 'User';
+    $email = isset($row['email'])? htmlspecialchars($row['email']) : 'User';
+} else {
+    $name = 'Admin';
+    $email = '';
+}
+
+?>
+
 <!doctype html>
 <!DOCTYPE html>
 <html lang="en">

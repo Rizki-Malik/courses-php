@@ -1,13 +1,4 @@
 <?php 
-ob_start(); // Start output buffering
-session_start();
-
-// Ensure user is logged in
-if (!isset($_SESSION['user']) || trim($_SESSION['user']) == '') {
-    header('Location: ../../auth/login.php');
-    exit();
-}
-
 require_once('../components/header.php'); 
 require_once('../../pustaka/Crud.php');
 require_once('../../pustaka/Thumbnail.php');
