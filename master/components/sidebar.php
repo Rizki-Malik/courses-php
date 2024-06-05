@@ -56,6 +56,18 @@
                 </a>
               </div>
               <div class="mdc-list-item mdc-drawer-item">
+                <a class="mdc-drawer-link" href="../organizations/org.php">
+                  <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">group_work</i>
+                  Organizations
+                </a>
+              </div>
+              <div class="mdc-list-item mdc-drawer-item">
+                <a class="mdc-drawer-link" href="../events/event.php">
+                  <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">event</i>
+                  Events
+                </a>
+              </div>
+              <div class="mdc-list-item mdc-drawer-item">
                 <a class="mdc-drawer-link" href="pages/ui-features/typography.html">
                   Example
                 </a>
@@ -80,19 +92,13 @@
               <div class="mdc-list-item mdc-drawer-item">
                 <a class="mdc-drawer-link" href="#">
                   <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">library_add</i>
-                  Categories
+                  Assignments
                 </a>
               </div>
               <div class="mdc-list-item mdc-drawer-item">
                 <a class="mdc-drawer-link" href="#">
                   <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">group</i>
-                  Students
-                </a>
-              </div>
-              <div class="mdc-list-item mdc-drawer-item">
-                <a class="mdc-drawer-link" href="#">
-                  <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">class</i>
-                  Instructors
+                  Grades
                 </a>
               </div>
               <div class="mdc-list-item mdc-drawer-item">
@@ -114,25 +120,13 @@
               <div class="mdc-list-item mdc-drawer-item">
                 <a class="mdc-drawer-link" href="#">
                   <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">library_books</i>
-                  Articles
+                  Enrollments
                 </a>
               </div>
               <div class="mdc-list-item mdc-drawer-item">
                 <a class="mdc-drawer-link" href="#">
                   <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">library_add</i>
-                  Categories
-                </a>
-              </div>
-              <div class="mdc-list-item mdc-drawer-item">
-                <a class="mdc-drawer-link" href="#">
-                  <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">group</i>
-                  Students
-                </a>
-              </div>
-              <div class="mdc-list-item mdc-drawer-item">
-                <a class="mdc-drawer-link" href="#">
-                  <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">class</i>
-                  Instructors
+                  Reviews
                 </a>
               </div>
               <div class="mdc-list-item mdc-drawer-item">

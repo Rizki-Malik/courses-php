@@ -25,11 +25,9 @@
         </div>
     </div>
 </div>
-<?php require_once('../components/footer.php'); ?>
-
-<?php
+<?php 
+require_once('../components/footer.php');
 require_once('../../pustaka/Crud.php');
-require_once('../../pustaka/Thumbnail.php');
 
 $crud = new Crud();
 

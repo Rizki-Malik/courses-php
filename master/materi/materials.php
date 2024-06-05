@@ -17,6 +17,7 @@
                         <th class="text-center">Kelas</th>
                         <th class="text-center">Judul Materi</th>
                         <th class="text-center">Deskripsi Materi</th>
+                        <th class="text-center">Penulis</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -25,23 +26,27 @@
                     require_once '../../pustaka/Crud.php';
                     $crud = new Crud();
                     $conn = $crud->getConnection();
-                    $sql = "SELECT course_materials.*, course.course_name 
+                    $sql = "SELECT course_materials.*, course.course_name, users.username, instructors.instructor_name
                             FROM course_materials
-                            LEFT JOIN course ON course_materials.course_id = course.id";
+                            LEFT JOIN course ON course_materials.course_id = course.id
+                            LEFT JOIN users ON course_materials.user_id = users.id
+                            LEFT JOIN instructors ON course_materials.user_id = instructors.user_id";
                     $result = $conn->query($sql);
                     $no = 1;
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            ?>
+                            $instructor_name = isset($row['instructor_name']) ? $row['instructor_name'] : $row['username'];
+                    ?>
                             <tr>
-                                <th scope="row"><?= $no++; ?></th>
-                                <td class="text-center"><?= ucwords($row['course_name']); ?></td>
-                                <td class="text-center"><?= ucwords($row['material_title']); ?></td>
-                                <td class="text-center"><?= strlen($row['material_description']) > 100 ? substr($row['material_description'], 0, 100) . '...' : $row['material_description']; ?></td>
+                                <th scope="row"><?= $no++;?></th>
+                                <td class="text-center"><?= ucwords($row['course_name']);?></td>
+                                <td class="text-center"><?= ucwords($row['material_title']);?></td>
+                                <td class="text-center"><?= strlen($row['material_description']) > 100? substr($row['material_description'], 0, 100). '...' : $row['material_description'];?></td>
+                                <td class="text-center"><?= ucwords($instructor_name); ?></td>
                                 <td>
-                                    <a href="#?id=<?= $row['id']; ?>" data-toggle="tooltip" data-placement="top" title="Detail"><i class="material-icons">remove_red_eye</i></a>
-                                    <a href="material-edit.php?id=<?= $row['id']; ?>" data-toggle="tooltip" data-placement="top" title="Edit"><i class="material-icons" aria-hidden="true">edit</i></a>
-                                    <a href="material.php?action=delete&id=<?= $row['id']; ?>" onclick="return confirm('Apakah anda yakin ?');" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="material-icons" aria-hidden="true">delete</i></a>
+                                    <a href="#?id=<?= $row['id'];?>" data-toggle="tooltip" data-placement="top" title="Detail"><i class="material-icons">remove_red_eye</i></a>
+                                    <a href="material-edit.php?id=<?= $row['id'];?>" data-toggle="tooltip" data-placement="top" title="Edit"><i class="material-icons" aria-hidden="true">edit</i></a>
+                                    <a href="materials.php?action=delete&id=<?= $row['id'];?>" onclick="return confirm('Apakah anda yakin?');" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="material-icons" aria-hidden="true">delete</i></a>
                                 </td>
                             </tr>
                             <?php
@@ -49,7 +54,7 @@
                     } else {
                         echo "<tr><td colspan='5'>Tidak ada data</td></tr>";
                     }
-                    ?>
+                ?>
                 </tbody>
             </table>
         </div>
@@ -71,6 +76,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
         echo "<script>alert('Data tidak berhasil dihapus');</script>";
     }
 
-    echo '<meta http-equiv="refresh" content="0; url=material.php">';
+    echo '<meta http-equiv="refresh" content="0; url=materials.php">';
 }
 ?>

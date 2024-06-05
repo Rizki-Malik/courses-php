@@ -1,7 +1,6 @@
-<?php require_once('../components/header.php'); ?>
-<?php
+<?php 
+require_once('../components/header.php');
 require_once('../../pustaka/Crud.php');
-require_once('../../pustaka/Thumbnail.php');
 
 $crud = new Crud();
 
@@ -47,9 +46,8 @@ if ($id_kategori) {
         </div>
     </div>
 </div>
-<?php require_once('../components/footer.php'); ?>
-
-<?php
+<?php 
+require_once('../components/footer.php');
 if (isset($_POST['submit'])) {
     $category_name = $_POST['category_name'];
 
