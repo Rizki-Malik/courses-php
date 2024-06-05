@@ -15,7 +15,7 @@
                     <tr class="text-center">
                         <th class="text-left">#</th>
                         <th class="text-center">Nama Organisasi</th>
-                        <th>Deskripsi</th>
+                        <th class="text-center">Deskripsi</th>
                         <th class="text-center">Link</th>
                     </tr>
                 </thead>
@@ -30,7 +30,7 @@
                         <tr>
                             <th scope="row"><?= $no++; ?></th>
                             <td class="text-center"><?= ucwords($row['name']); ?></td>
-                            <td><?= $row['description']; ?></td>
+                            <td class="text-center"><?= strlen($row['description']) > 100? substr($row['description'], 0, 100). '...' : $row['description'];?></td>
                             <td class="text-center"><?= $row['link']; ?></td>
                             <td>
                                 <a href="org-edit.php?id=<?= $row['id']; ?>" data-toggle="tooltip" data-placement="top" title="Edit"><i class="material-icons" aria-hidden="true">edit</i></a>

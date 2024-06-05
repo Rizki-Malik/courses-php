@@ -41,7 +41,7 @@
                                 <th scope="row"><?= $no++; ?></th>
                                 <td class="text-center"><?= ucwords($row['username']); ?></td>
                                 <td class="text-center"><?= ucwords($row['event_name']); ?></td>
-                                <td class="text-center"><?= ucwords($row['event_description']); ?></td>
+                                <td class="text-center"><?= strlen($row['event_description']) > 100? substr($row['event_description'], 0, 100). '...' : $row['event_description'];?></td>
                                 <td class="text-center"><?= $row['event_date']; ?></td>
                                 <td class="text-center"><?= $row['event_link']; ?></td>
                                 <td class="text-center"><?= ucwords($row['name']); ?></td>
@@ -83,6 +83,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
         echo "<script>alert('Organisasi tidak ditemukan');</script>";
     }
     
-    echo '<meta http-equiv="refresh" content="0; url=org.php">';
+    echo '<meta http-equiv="refresh" content="0; url=event.php">';
 }
 ?>
