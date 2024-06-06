@@ -5,6 +5,23 @@ require_once('../../pustaka/User.php');
 
 $user = new User();
 $crud = new Crud();
+$table = 'events';
+$id_event = isset($_GET['id']) ? $_GET['id'] : null;
+if ($id_event) {
+    $where = ['id' => $id_event];
+    $row = $crud->read($table, $where);
+    if ($row) {
+        $event = $row[0];
+    } else {
+        echo "<script>alert('Kategori tidak ditemukan');</script>";
+        echo '<meta http-equiv="refresh" content="0; url=event.php">';
+        exit;
+    }
+} else {
+    echo "<script>alert('ID kategori tidak diberikan');</script>";
+    echo '<meta http-equiv="refresh" content="0; url=event.php">';
+    exit;
+}
 
 $sql = "SELECT * FROM users WHERE id = '".$_SESSION['user']."'";
 $user_details = $user->details($sql);
@@ -20,7 +37,7 @@ $organizations = $crud->read('organizations');
                 <!-- Judul input -->
                 <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
                     <div class="mdc-text-field mdc-text-field--outlined">
-                        <input class="mdc-text-field__input" name="event_name" id="event_name" required>
+                        <input class="mdc-text-field__input" name="event_name" id="event_name" value='<?= htmlspecialchars($event['event_name'], ENT_QUOTES, 'UTF-8'); ?>' required>
                         <div class="mdc-notched-outline">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch">
@@ -36,7 +53,7 @@ $organizations = $crud->read('organizations');
                         <h6 class="card-title">Pilih Penyelenggara</h6>
                         <div class="template-demo">
                             <div class="mdc-select demo-width-class" data-mdc-auto-init="MDCSelect">
-                                <input type="hidden" name="org_id">
+                                <input type="hidden" name="org_id" value='<?= htmlspecialchars($event['org_id'], ENT_QUOTES, 'UTF-8'); ?>'>
                                 <i class="mdc-select__dropdown-icon"></i>
                                 <div class="mdc-select__selected-text"></div>
                                 <div class="mdc-select__menu mdc-menu-surface demo-width-class">
@@ -58,7 +75,7 @@ $organizations = $crud->read('organizations');
                 <!-- Deskripsi input -->
                 <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
                     <div class="mdc-text-field mdc-text-field--outlined">
-                        <textarea class="mdc-text-field__input" name="event_description" id="event_description" required></textarea>
+                        <textarea class="mdc-text-field__input" name="event_description" id="event_description" required><?= htmlspecialchars($event['event_description'], ENT_QUOTES, 'UTF-8'); ?></textarea>
                         <div class="mdc-notched-outline">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch">
@@ -71,7 +88,7 @@ $organizations = $crud->read('organizations');
                 <!-- Tanggal input -->
                 <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
                     <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--focused">
-                        <input type="date" class="mdc-text-field__input" name="event_date" id="event_date" required>
+                        <input type="date" class="mdc-text-field__input" name="event_date" id="event_date" value='<?= htmlspecialchars($event['event_date'], ENT_QUOTES, 'UTF-8'); ?>' required>
                         <div class="mdc-notched-outline mdc-notched-outline--upgraded mdc-notched-outline--notched">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch">
@@ -84,7 +101,7 @@ $organizations = $crud->read('organizations');
                 <!-- Link input -->
                 <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
                     <div class="mdc-text-field mdc-text-field--outlined">
-                        <input class="mdc-text-field__input" name="event_link" id="event_link" required>
+                        <input class="mdc-text-field__input" name="event_link" id="event_link" value='<?= htmlspecialchars($event['event_link'], ENT_QUOTES, 'UTF-8'); ?>' required>
                         <div class="mdc-notched-outline">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch">
@@ -105,7 +122,6 @@ $organizations = $crud->read('organizations');
 
 <?php 
 require_once('../components/footer.php');
-require_once('../../pustaka/Thumbnail.php');
 
 if (isset($_POST['submit'])) {
     $event_name = $_POST['event_name'];
@@ -123,12 +139,12 @@ if (isset($_POST['submit'])) {
         'org_id' => $org_id,
     ];
 
-    $hasil = $crud->create('events', $data);
+    $hasil = $crud->update($table, $data, $where);
 
     if ($hasil) {
-        echo "<script>alert('Data berhasil disimpan');</script>";
+        echo "<script>alert('Data berhasil dirubah');</script>";
     } else {
-        echo "<script>alert('Data tidak berhasil disimpan');</script>";
+        echo "<script>alert('Data tidak berhasil dirubah');</script>";
     }
     echo '<meta http-equiv="refresh" content="0; url=event.php">';
 }

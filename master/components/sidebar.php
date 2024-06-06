@@ -84,13 +84,19 @@
           <div class="mdc-expansion-panel" id="ui3-sub-menu">
             <nav class="mdc-list mdc-drawer-submenu">
               <div class="mdc-list-item mdc-drawer-item">
+                <a class="mdc-drawer-link" href="../participants/instrcuror.php">
+                  <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">library_books</i>
+                  Events
+                </a>
+              </div>
+              <div class="mdc-list-item mdc-drawer-item">
                 <a class="mdc-drawer-link" href="../materi/materials.php">
                   <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">library_books</i>
                   Materials
                 </a>
               </div>
               <div class="mdc-list-item mdc-drawer-item">
-                <a class="mdc-drawer-link" href="#">
+                <a class="mdc-drawer-link" href="../tugas/tugas.php">
                   <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">library_add</i>
                   Assignments
                 </a>
@@ -118,6 +124,12 @@
           <div class="mdc-expansion-panel" id="ui2-sub-menu">
             <nav class="mdc-list mdc-drawer-submenu">
               <div class="mdc-list-item mdc-drawer-item">
+                <a class="mdc-drawer-link" href="../participants/student.php">
+                  <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">library_books</i>
+                  Events
+                </a>
+              </div>
+              <div class="mdc-list-item mdc-drawer-item">
                 <a class="mdc-drawer-link" href="#">
                   <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">library_books</i>
                   Enrollments
@@ -125,6 +137,12 @@
               </div>
               <div class="mdc-list-item mdc-drawer-item">
                 <a class="mdc-drawer-link" href="#">
+                  <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">library_books</i>
+                  Assignments
+                </a>
+              </div>
+              <div class="mdc-list-item mdc-drawer-item">
+                <a class="mdc-drawer-link" href="../reviews/review.php">
                   <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">library_add</i>
                   Reviews
                 </a>
