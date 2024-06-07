@@ -26,8 +26,8 @@
                 <a href="index.php"><li>Home</li></a>
                 <a href="index.php?q=about"><li>About</li></a>
                 <a href="index.php?q=artikel"><li>Article</li></a>
-                <a href="#"><li>Courses</li></a>
-                <a href="#"><li>Dashboard</li></a>
+                <a href="index.php?q=courses"><li>Courses</li></a>
+                <a href="master/dashboard"><li>Dashboard</li></a>
             </ul>
         </nav>
         <div class="contact">
